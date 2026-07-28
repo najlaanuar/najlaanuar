@@ -3,169 +3,926 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio - Data Analyst & Web Developer</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Najlaa | Web Developer & Data Analyst</title>
+    <!-- Font Inter & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --primary: #4f46e5;      /* Indigo Elegant */
+            --primary-hover: #4338ca;
+            --accent: #0ea5e9;       /* Light Blue Accent */
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.08);
+            --shadow-hover: 0 20px 30px -10px rgba(79, 70, 229, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- SECTION BASE --- */
+        section {
+            min-height: 100vh;
+            padding: 6rem 8% 4rem 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin-top: 6px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* --- PAGE 1: HERO --- */
+        #hero {
+            align-items: flex-start;
+            background: radial-gradient(circle at 90% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 10% 90%, rgba(79, 70, 229, 0.08) 0%, transparent 40%);
+        }
+
+        .badge {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .typing-text {
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary); }
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- PAGE 2: TECH STACK --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.8rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .skill-card i {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* --- PAGE 3 & 4: PROJECTS --- */
+        .projects-grid {
+            display: grid;
+            /* Default Layar Desktop / Laptop: Maksimal 3 Kolom Kesamping */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 2rem; /* Jarak antar card */
+            width: 100%;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden; /* Mencegah gambar keluar dari batas card */
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column; /* Menyusun gambar di atas dan teks di bawah secara berurutan */
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px; /* Tinggi area gambar yang pas */
+            position: relative;
+            overflow: hidden;
+            background-color: #f1f5f9;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Biar gambar proporsional tanpa gepeng */
+            display: block; /* Mencegah spasi aneh di bawah gambar */
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05); /* Efek zoom halus saat hover */
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: #ffffff; /* Memastikan latar teks berwarna putih polos */
+            z-index: 1;
+        }
+
+        .project-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        /* --- PAGE 5: EDUCATION --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            border-left: 3px solid var(--border);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: calc(-2rem - 8px);
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 1.5rem 1.8rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-sub {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        /* Layout Hero (Kiri-Kanan) */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-illustration {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Kanvas Utama Hiasan */
+        .tech-canvas {
+            position: relative;
+            width: 380px;
+            height: 340px;
+        }
+
+        /* Base Glassmorphism Card */
+        .glass-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+            padding: 1rem;
+        }
+
+        /* 1. Card Code Window (Web Dev) */
+        .code-card {
+            top: 10px;
+            left: 10px;
+            width: 240px;
+            background: #0f172a;
+            color: #f8fafc;
+            font-family: monospace;
+            z-index: 2;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.red { background: #ef4444; }
+        .dot.yellow { background: #f59e0b; }
+        .dot.green { background: #10b981; }
+
+        .code-body code {
+            display: block;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .purple { color: #c084fc; }
+        .blue { color: #38bdf8; }
+
+        /* 2. Card Pie Chart (Data Analytics) */
+        .chart-card {
+            top: 100px;
+            right: 10px;
+            width: 170px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .chart-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .pie-chart-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .circular-chart {
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 3.8;
+        }
+
+        .circle {
+            fill: none;
+            stroke-width: 3.8;
+            stroke-linecap: round;
+            stroke: var(--primary);
+            animation: progress 2s ease-out forwards;
+        }
+
+        .chart-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* 3. Card Bar Chart */
+        .bar-card {
+            bottom: 20px;
+            left: 40px;
+            width: 160px;
+            height: 90px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 12px;
+            z-index: 1;
+        }
+
+        .bar-item {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--accent));
+            height: var(--h);
+            border-radius: 6px;
+            transition: height 0.5s ease;
+        }
+
+        /* 4. Node Badge */
+        .node-badge {
+            bottom: 10px;
+            right: 30px;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            z-index: 4;
+        }
+
+        /* Keyframes untuk Efek Floating/Melayang & Animasi Chart */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .floating-1 { animation: float 4s ease-in-out infinite; }
+        .floating-2 { animation: float 5s ease-in-out infinite 0.5s; }
+        .floating-3 { animation: float 4.5s ease-in-out infinite 1s; }
+        .floating-4 { animation: float 3.8s ease-in-out infinite 1.5s; }
+
+        /* Responsive untuk HP/Layar Kecil */
+        @media (max-width: 868px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-illustration {
+                margin-top: 2rem;
+            }
+            .tech-canvas {
+                transform: scale(0.85); /* Mengecil secara pas di HP */
+            }
+        }
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+        .projects-grid {
+             grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+
+        /* Responsif: Layar HP / Layar Kecil (Di bawah 640px) -> Jadi 1 Kolom ke bawah */
+        @media (max-width: 640px) {
+        .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-teal-500 selection:text-slate-900">
+<body>
 
-    <!-- Container Utama -->
-    <div class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Najlaa.dev</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#skills">Tech Stack</a></li>
+            <li><a href="#web-projects">Web Projects</a></li>
+            <li><a href="#data-projects">Data Projects</a></li>
+            <li><a href="#education">Pendidikan</a></li>
+        </ul>
+    </nav>
 
-        <!-- Hero Section -->
-        <header class="space-y-4 border-b border-slate-800 pb-10">
-            <div class="inline-block px-3 py-1 bg-teal-500/10 text-teal-400 text-sm font-semibold rounded-full border border-teal-500/20 mb-2">
-                Available for Projects & Roles
-            </div>
-            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                Hi there, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">[Nama Kamu]</span> 👋
-            </h1>
-            <p class="text-xl text-slate-400 font-medium leading-relaxed">
-                <span class="text-slate-200 font-semibold">Data Analyst & Web Developer</span><br>
-                Bridging data insights and web architecture to build end-to-end, efficient technical solutions.
-            </p>
-            <div class="flex flex-wrap gap-4 pt-4 text-sm font-medium">
-                <a href="sitinajlaanuarainii87@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg transition border border-slate-700">
-                    <i class="fa-regular fa-envelope text-teal-400"></i> Kirim Email
-                </a>
-                <a href="https://www.linkedin.com/in/sitinajlaa-nurainii-082113229/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg transition border border-slate-700">
-                    <i class="fa-brands fa-linkedin text-blue-400"></i> LinkedIn Profile
-                </a>
-            </div>
-        </header>
+    <!-- PAGE 1: HERO -->
+    <section id="hero">
+        <div class="hero-container">
+            <!-- SISI KIRI: TEKS & TOMBOL -->
+            <div class="hero-content">
+                <span class="badge">✨ Welcome to my portfolio</span>
+                <h1 class="hero-title">
+                    Hallo, Najlaa disini!<br>
+                    <span class="typing-text" id="typing"></span>
+                </h1>
+                <p class="hero-desc">
+                    Seseorang yang berfokus membangun aplikasi web yang responsif sekaligus mengolah serta menganalisis data untuk menghasilkan insight bernilai. Mari berkolaborasi!
+                </p>
 
-        <!-- About Me Section -->
-        <section class="space-y-4">
-            <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                <span class="text-teal-400">👩‍💻</span> About Me
-            </h2>
-            <p class="text-slate-300 leading-relaxed">
-                I am an IT professional specializing in <strong class="text-white">Web Development</strong> and <strong class="text-white">Data Analytics</strong>. I bridge the gap between robust software architecture and data-driven insights.
-            </p>
-            <ul class="space-y-3 text-slate-300">
-                <li class="flex items-start gap-3">
-                    <span class="text-teal-400 font-bold">🔭</span>
-                    <span><strong class="text-slate-100">What I Do:</strong> Build functional web applications, structure scalable databases, and develop end-to-end data pipelines (ETL/ELT).</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="text-teal-400 font-bold">⚙️</span>
-                    <span><strong class="text-slate-100">Focus:</strong> Data automation, system integration, and building clean, responsive web platforms.</span>
-                </li>
-            </ul>
-        </section>
-
-        <!-- Tech Stack Section -->
-        <section class="space-y-6">
-            <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                <span class="text-teal-400">🛠️</span> Tech Stack & Tools
-            </h2>
-            
-            <div class="space-y-4">
-                <div>
-                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Languages & Frameworks</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=sqlite&logoColor=white" alt="SQL" class="h-7 rounded">
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Data Engineering & Analytics</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <img src="https://img.shields.io/badge/Apache%20NiFi-7289DA?style=flat-square&logo=apache&logoColor=white" alt="Apache NiFi" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=flat-square&logo=apacheairflow&logoColor=white" alt="Apache Airflow" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL" class="h-7 rounded">
-                        <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" class="h-7 rounded">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section class="space-y-8">
-            <div class="space-y-2">
-                <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                    <span class="text-teal-400">📌</span> Featured Projects
-                </h2>
-                <div class="p-4 bg-slate-800/60 border border-slate-700/60 rounded-xl text-sm text-slate-400 italic">
-                    <strong class="text-slate-200 not-italic">Note:</strong> Due to NDA and data privacy policies, screenshots and live demos for internal enterprise projects are restricted. Below are structural overviews, architecture highlights, and tech stacks used for each system.
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/sitinajlaa-nurainii-082113229/" target="_blank" class="btn-social btn-primary">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/najlaanuar" target="_blank" class="btn-social btn-outline">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="mailto:sitinajlaanurainii87@gmail.com" class="btn-social btn-outline">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
                 </div>
             </div>
 
-            <!-- Category 1: Data Engineering -->
-            <div class="space-y-6">
-                <h3 class="text-xl font-bold text-teal-400 border-b border-slate-800 pb-2">
-                    📊 1. Data Engineering & Analytics Projects
-                </h3>
+            <!-- SISI KANAN: HIASAN KANVAS WEB & BIG DATA ANIMASI -->
+            <div class="hero-illustration">
+                <div class="tech-canvas">
+                    <!-- Card Code / Web Programming -->
+                    <div class="glass-card code-card floating-1">
+                        <div class="code-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="code-body">
+                            <code><span class="purple">const</span> dev = <span class="blue">"Najlaa"</span>;</code>
+                            <code><span class="purple">async function</span> analyze() {</code>
+                            <code>&nbsp;&nbsp;<span class="purple">await</span> data.fetch();</code>
+                            <code>}</code>
+                        </div>
+                    </div>
 
-                <!-- Project Item -->
-                <div class="p-6 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-slate-600 transition space-y-4">
-                    <div>
-                        <span class="text-xs font-semibold px-2.5 py-1 bg-teal-500/10 text-teal-300 rounded border border-teal-500/20">Data Analyst / Data Engineer</span>
-                        <h4 class="text-lg font-bold text-white mt-2">[Project Name 1 / Placeholder]</h4>
+                    <!-- Card Pie Chart / Data Analytics -->
+                    <div class="glass-card chart-card floating-2">
+                        <div class="chart-title"><i class="fas fa-chart-pie"></i> Data Insights</div>
+                        <div class="pie-chart-wrapper">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <div class="chart-value">75%</div>
+                        </div>
                     </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Deskripsi singkat 1-2 kalimat tentang masalah yang diselesaikan atau sistem data yang dibangun.
-                    </p>
-                    <div class="space-y-2 text-sm text-slate-300">
-                        <p class="font-semibold text-slate-200">Key Features & Contributions:</p>
-                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
-                            <li>Merancang ETL pipeline otomatis untuk penarikan data berjadwal.</li>
-                            <li>Mengintegrasikan multiple data sources ke dalam centralized database.</li>
-                            <li><strong class="text-teal-300">Impact/Result:</strong> Meningkatkan efisiensi pemrosesan data.</li>
-                        </ul>
+
+                    <!-- Card Bar / Big Data Trend -->
+                    <div class="glass-card bar-card floating-3">
+                        <div class="bar-item" style="--h: 40%"></div>
+                        <div class="bar-item" style="--h: 75%"></div>
+                        <div class="bar-item" style="--h: 55%"></div>
+                        <div class="bar-item" style="--h: 90%"></div>
                     </div>
-                    <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">Python</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">Apache NiFi</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">Airflow</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">PostgreSQL</span>
+
+                    <!-- Network/Database Node Badge -->
+                    <div class="glass-card node-badge floating-4">
+                        <i class="fas fa-database"></i> <span>Big Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2: TECH STACK -->
+    <section id="skills">
+        <h2 class="section-title">Tech Stack & Bahasa</h2>
+        <p class="section-subtitle">Teknologi dan tools yang sering saya gunakan dalam pengembangan software & analisis data.</p>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <div class="tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">.Net</span>
+                    <span class="tag">Laravel</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analysis & Mining</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Airflow</span>
+                    <span class="tag">Apache Nifi</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>Database & Tools</h3>
+                <div class="tags">
+                    <span class="tag">DBeaver</span>
+                    <span class="tag">Sql Server</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Git & GitHub</span>
+                    <span class="tag">VS Code</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Superset</span>
+                    <span class="tag">Mobaxtrem</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: WEB PROJECTS -->
+    <section id="web-projects">
+        <h2 class="section-title">Web Projects</h2>
+        <p class="section-subtitle">Beberapa aplikasi dan situs web yang pernah saya rancang dan kembangkan.</p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://pengadaan.penerbitdeepublish.com/wp-content/uploads/2023/04/perpustakaan-sekolah.webp" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Perpustakaan Sederhana</h3>
+                    <p>Perpustakaan Sederhana merupakan aplikasi manajemen katalog berbasis web yang dirancang untuk mempermudah pengelolaan data buku dan riwayat peminjaman secara efisien. Mengusung konsep operasi CRUD (Create, Read, Update, Delete) dasar, sistem ini menyediakan antarmuka yang intuitif dan mudah digunakan untuk menangani administrasi perpustakaan harian</p>
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Category 2: Web Dev -->
-            <div class="space-y-6">
-                <h3 class="text-xl font-bold text-blue-400 border-b border-slate-800 pb-2">
-                    💻 2. Web & Application Development Projects
-                </h3>
-
-                <!-- Project Item -->
-                <div class="p-6 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-slate-600 transition space-y-4">
-                    <div>
-                        <span class="text-xs font-semibold px-2.5 py-1 bg-blue-500/10 text-blue-300 rounded border border-blue-500/20">Web Developer</span>
-                        <h4 class="text-lg font-bold text-white mt-2">[Project Name 1 / Placeholder]</h4>
-                    </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Deskripsi singkat tentang aplikasi/web internal yang dibuat (fungsionalitas utamanya).
-                    </p>
-                    <div class="space-y-2 text-sm text-slate-300">
-                        <p class="font-semibold text-slate-200">Key Features & Contributions:</p>
-                        <ul class="list-disc list-inside space-y-1 text-slate-400 pl-2">
-                            <li>Membangun modular backend & UI yang responsif untuk operasional tim.</li>
-                            <li>Optimalisasi query database untuk mempercepat response time aplikasi.</li>
-                            <li>Implementasi sistem autentikasi dan manajemen hak akses pengguna.</li>
-                        </ul>
-                    </div>
-                    <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono">
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">PHP</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">JavaScript</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">MySQL</span>
-                        <span class="px-2 py-1 bg-slate-900 text-slate-300 rounded border border-slate-700">Bootstrap / Tailwind</span>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://pasuruankota.go.id/file/uploads/sites/29/2025/05/Pengaduan-Masyarakat.png" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Web Layanan Pengaduan Masyarakat Sedehana</h3>
+                    <p>Platform web ini dibangun untuk memfasilitasi masyarakat dalam menyampaikan aspirasi, laporan, serta pengaduan secara terstruktur. Mengutamakan performa yang cepat dan desain yang responsif di berbagai perangkat, sistem ini memastikan setiap masukan dari masyarakat dapat tersampaikan dengan lancar melalui antarmuka yang modern dan ramah pengguna.</p>
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Footer / Quote -->
-        <footer class="text-center pt-8 border-t border-slate-800 text-slate-500 text-sm italic">
-            "Transforming complex requirements into simple, elegant code and insights."
-        </footer>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://www.isp-education.ac.id/wp-content/uploads/2023/06/Dialog-Singkat-Reservation-Hotel-Berbahasa-Inggris.jpg" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Web Reservasi Hotel Sederhana</h3>
+                    <p>Web Reservasi Hotel Sederhana adalah sistem alur pemesanan kamar hotel yang menitikberatkan pada kesederhanaan transaksi tanpa integrasi pembayaran eksternal. Sistem ini bekerja dengan menerbitkan tiket digital berbasis barcode setelah proses pemesanan, di mana pemindaian barcode tersebut akan secara otomatis memperbarui dan mengurangi jumlah stok kamar yang tersedia secara real-time.</p>
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
 
-    </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://bimtek-nasional.com/wp-content/uploads/2024/09/perjalanan_dinas_luar_negeri-tugas-luar-kota_20170824_215736.jpg" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Cash Advance System</h3>
+                    <p>Cash Advance System merupakan aplikasi manajemen keuangan operasional internal yang dirancang untuk menangani alur pengajuan serta pelaporan biaya perjalanan dinas. Selain itu, sistem ini juga memfasilitasi administrasi pembayaran inventaris dan vendor, sehingga seluruh proses pencairan serta pertanggungjawaban dana perusahaan dapat terdokumentasi dengan rapi dan terpusat.</p>
+                    <div class="tags">
+                        <span class="tag">.Net</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
 
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://assets.promediateknologi.id/crop/0x0:0x0/750x0/webp/photo/hulondalo/2020/03/perjalanan-dinas-hulondalo.id_.png" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Web Perjalanan Dinas dan Budgeting</h3>
+                    <p>Aplikasi ini merupakan pengembangan dari sistem perjalanan dinas yang dilengkapi dengan modul kontrol anggaran (budget control) secara ketat. Berbeda dengan sistem cash advance biasa, web ini memiliki aturan validasi khusus di mana pengguna tidak dapat membuat pengajuan perjalanan dinas jika alokasi anggaran tidak mencukupi atau kosong, sehingga membantu perusahaan menjaga efisiensi serta akuntabilitas alokasi dana operasional.</p>
+                    <div class="tags">
+                        <span class="tag">.Net</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc8iz3c2DrUZXUpgCovxChG-bvhc4m_IU2qXKDO-y7M4PTNtNHv1XafTXR154AdKuVAvkrOXoOtxvEdEVON2juyDy9aoaKYpALlyo5CrJdZUXo8jzdxH_e_9DihQlr7rwlPNUUp1c_dUZWQVy5G6MTeuQi94BHkD2VCLHRmqauxpyFpYIHJHT0?key=Ve1kyu4BXj65fhRWLbTPdiRa" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>NR Journey</h3>
+                    <p>NR Journey adalah platform all-in-one travel booking yang menyajikan solusi praktis bagi wisatawan untuk memesan paket perjalanan lengkap di Indonesia tanpa perlu mengurus reservasi secara terpisah. Aplikasi ini mengintegrasikan pemesanan penginapan, tiket tempat wisata, dan layanan tour guide dalam satu alur terpadu. Sistem reservasinya bekerja hingga penerbitan barcode konfirmasi yang secara otomatis mengurangi kuota pemesanan yang tersedia.</p>
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">CodeIgniter5</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Html5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 4: DATA / BIG DATA PROJECTS -->
+    <section id="data-projects">
+        <h2 class="section-title">Data & Analytics Projects</h2>
+        <p class="section-subtitle">Pengolahan data, visualisasi, dan analitik yang pernah saya kerjakan.</p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+               <div class="project-img">
+                    <img src="https://cdn.prod.website-files.com/5ee50f2ef83ac07f0cb7fb44/6421a34487be89319523d2e5_unnamed%20-%202023-03-27T220755.504.jpg" alt="Project Web">
+                </div>
+                <div class="project-info">
+                    <h3>Enterprise Data Pipeline & Analytics Platform</h3>
+                    <p>Enterprise Data Pipeline & Analytics Platform merupakan sistem pengolahan dan pemrosesan data berbasis Big Data yang dirancang untuk mengotomatisasi alur data (data pipeline) dan pengintegrasian data skala besar secara terstruktur. Memanfaatkan kombinasi Apache NiFi untuk eksekusi alur ETL (Extract, Transform, Load) yang andal serta Apache Airflow sebagai orchestrator, platform ini mampu menarik data dari berbagai sumber secara otomatis—termasuk integrasi via API, web scraping, ekstraksi data dari email untuk pembaruan harga batubara (coal price) hingga konsumsi data prakiraan cuaca eksternal (BMKG/IBM). Seluruh hasil pemrosesan data divisualisasikan secara langsung melalui dashboard analitik dan portal informasi terpadu, memastikan ketersediaan data yang presisi, tersinkronisasi, serta siap dimanfaatkan untuk pengambilan keputusan strategis tingkat enterprise.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Airflow</span>
+                        <span class="tag">Apache Nifi</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Airflow</span>
+                        <span class="tag">Superset</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 5: EDUCATION -->
+    <section id="education">
+        <h2 class="section-title">Riwayat Pendidikan</h2>
+        <p class="section-subtitle">Latar belakang pendidikan formal yang membentuk fondasi keahlian saya.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Sekarang</div>
+                    <div class="timeline-title">IBI Kesatuan Bogor</div>
+                    <div class="timeline-sub">Mahasiswa Jurusan Sistem Informasi</div>
+                    <div class="timeline-sub">2023 - Sekarang</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Lulus</div>
+                    <div class="timeline-title">SMK Wikrama 01 Garut</div>
+                    <div class="timeline-sub">Rekayasa Perangkat Lunak (RPL)</div>
+                    <div class="timeline-sub">2019 - 2022</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Najlaa. Built with clean code & passion.</p>
+    </footer>
+
+    <!-- SCRIPT EFEK KETIK (TYPING ANIMATION) -->
+    <script>
+        const textElement = document.getElementById('typing');
+        const phrases = [
+            "Junior Web Programmer",
+            "Data Analyst",
+            "Tech & Code Explorer"
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000; // Diam sebentar saat teks lengkap
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', typeEffect);
+    </script>
 </body>
 </html>
